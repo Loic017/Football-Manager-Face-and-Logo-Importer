@@ -63,10 +63,10 @@ class FinishImportFrame(ct.CTkFrame):
             parentDir = "{}/{}/teamlogo/config.xml".format(
                 str(self.graphicsPath), str(self.fmId)
             )
-            generateConfig(self.fmId, True, parentDir, normalDir, smallDir)
+            generateConfig(self.fmId, True, parentDir, "normal/", "small/")
 
         elif self.importType == "player":
-            portraitFace = image.resize((200, 200))
+            portraitFace = image.resize((250, 250))
             iconFace = image.resize((20, 20))
 
             # Create directory if it doesnt exist
@@ -88,7 +88,7 @@ class FinishImportFrame(ct.CTkFrame):
             parentDir = "{}/{}/playerFaces/config.xml".format(
                 str(self.graphicsPath), str(self.fmId)
             )
-            generateConfig(self.fmId, False, parentDir, normalDir, iconDir)
+            generateConfig(self.fmId, False, parentDir, "portrait/", "icon/")
 
 
 # Main App
