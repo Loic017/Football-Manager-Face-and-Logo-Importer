@@ -1,7 +1,7 @@
 # Football Manager Face and Logo Importer ⚽
 A program to import player faces or team logos individually into Football Manager.
 
-Have a newgen you want to give a specific face? Maybe you want to give an existing legend a special picture with a trophy. Have a custom logo you want to give you team? This program allows you to easily import them into the game individually, avoiding the hassle of resizing images, renaming them and rest of the mess.
+Have a newgen you want to give a specific face? Maybe you want to give an existing legend a special picture with a trophy. Have a custom logo you made for your team? This program allows you to easily import them into the game individually, avoiding the hassle of resizing images, renaming them and the rest of the mess.
 
 This program auto resizes imported images into the correct sizes, creating two versions for the icon and larger variants of FM images. Alongside this, an XML config file is automatically generated.
 
