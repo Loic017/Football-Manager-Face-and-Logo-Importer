@@ -1,10 +1,9 @@
-import tkinter as tk
-from tkinter import filedialog
-from tkinter import messagebox
 import customtkinter as ct
-from PIL import Image, ImageTk
-from importComponents import GraphicsFolderFrame, ImportTypeFrame, UploadImageFrame 
+from PIL import Image
+from importComponents import GraphicsFolderFrame, ImportTypeFrame, UploadImageFrame
 import os
+from generateConfig import generateConfig
+
 
 # Finish Import Frame
 class FinishImportFrame(ct.CTkFrame):
@@ -19,18 +18,21 @@ class FinishImportFrame(ct.CTkFrame):
         self.finishStepLabel.pack(padx=0, pady=5)
 
         # User input ID
-        self.idLabel = ct.CTkLabel(self, text="Enter Football Manager ID", fg_color="gray30", corner_radius=6)
+        self.idLabel = ct.CTkLabel(
+            self, text="Enter Football Manager ID", fg_color="gray30", corner_radius=6
+        )
         self.idLabel.pack(padx=0, pady=5)
         self.idInput = ct.CTkEntry(self)
         self.idInput.pack(padx=20, pady=3)
 
         # Button to activate processImport function
-        self.finishButton = ct.CTkButton(self, text="Import", command=self.processImport)
+        self.finishButton = ct.CTkButton(
+            self, text="Import", command=self.processImport
+        )
         self.finishButton.pack(padx=20, pady=20)
 
     # Process user inputs to import selected images
     def processImport(self):
-
         self.graphicsPath = self.graphicsFolder.filePathPath.cget("text")
         self.importType = self.importType.importTypeVar.get()
         self.imagePath = self.filePath.imagePathLabel.cget("text")
@@ -43,25 +45,50 @@ class FinishImportFrame(ct.CTkFrame):
             smallLogo = image.resize((20, 20))
 
             # Create directory if it doesnt exist
-            normalDir = "{}/{}/teamLogo/normal/".format(str(self.graphicsPath), str(self.fmId))
-            smallDir = "{}/{}/teamlogo/small/".format(str(self.graphicsPath), str(self.fmId))
+            normalDir = "{}/{}/teamLogo/normal/".format(
+                str(self.graphicsPath), str(self.fmId)
+            )
+            smallDir = "{}/{}/teamlogo/small/".format(
+                str(self.graphicsPath), str(self.fmId)
+            )
 
             os.makedirs(normalDir, exist_ok=True)
             os.makedirs(smallDir, exist_ok=True)
 
             # Save Images
-            normalLogo.save("{}/{}.png".format(normalDir, str(self.fmId)), 'PNG')
-            smallLogo.save("{}/{}.png".format(smallDir, str(self.fmId)), 'PNG')
+            normalLogo.save("{}{}.png".format(normalDir, str(self.fmId)), "PNG")
+            smallLogo.save("{}{}.png".format(smallDir, str(self.fmId)), "PNG")
+
+            # Generate config.xml
+            parentDir = "{}/{}/teamlogo/config.xml".format(
+                str(self.graphicsPath), str(self.fmId)
+            )
+            generateConfig(self.fmId, True, parentDir, normalDir, smallDir)
+
         elif self.importType == "player":
-            playerFace = image.resize((200, 200))
+            portraitFace = image.resize((200, 200))
+            iconFace = image.resize((20, 20))
 
             # Create directory if it doesnt exist
-            normalDir = "{}/{}/playerFaces/".format(str(self.graphicsPath), str(self.fmId))
+            normalDir = "{}/{}/playerFaces/portrait/".format(
+                str(self.graphicsPath), str(self.fmId)
+            )
+            iconDir = "{}/{}/playerFaces/icon/".format(
+                str(self.graphicsPath), str(self.fmId)
+            )
 
             os.makedirs(normalDir, exist_ok=True)
+            os.makedirs(iconDir, exist_ok=True)
 
             # Save Images
-            playerFace.save("{}/{}.png".format(normalDir, str(self.fmId)), 'PNG')
+            portraitFace.save("{}{}.png".format(normalDir, str(self.fmId)), "PNG")
+            iconFace.save("{}{}.png".format(iconDir, str(self.fmId)), "PNG")
+
+            # Generate config.xml
+            parentDir = "{}/{}/playerFaces/config.xml".format(
+                str(self.graphicsPath), str(self.fmId)
+            )
+            generateConfig(self.fmId, False, parentDir, normalDir, iconDir)
 
 
 # Main App
@@ -84,12 +111,15 @@ class App(ct.CTk):
         self.uploadImage.grid(row=1, column=1, padx=10, pady=(10, 0), sticky="nsew")
 
         # Finish Import
-        self.finishImport = FinishImportFrame(self, self.graphicsFolder, self.importType, self.uploadImage)
+        self.finishImport = FinishImportFrame(
+            self, self.graphicsFolder, self.importType, self.uploadImage
+        )
         self.finishImport.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsew")
 
         # app = ct.CTk()
         self.geometry("650x650")
         self.title("Football Manager Importer")
+
 
 # Run App
 app = App()
