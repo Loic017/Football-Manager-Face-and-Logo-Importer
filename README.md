@@ -51,6 +51,23 @@ This program auto resizes imported images into the correct sizes, creating two v
 
 ***
 
+# Demo
+
+- Timo Werner doesnt have a face, his ID is 92051583
+<img width="300" alt="image" src="https://github.com/Loic017/Football-Manager-Face-and-Logo-Importer/assets/105462797/b061e898-b68a-4dd3-ac26-1239c6313442">
+
+- I will change it to this picture of him
+<img width="150" alt="image" src="https://github.com/Loic017/Football-Manager-Face-and-Logo-Importer/assets/105462797/e510b2ef-bd77-43ba-888e-4f07d6653a38">
+
+- I then input the correct entries into the program and press Import
+<img width="347" alt="image" src="https://github.com/Loic017/Football-Manager-Face-and-Logo-Importer/assets/105462797/fc51c04b-ac87-4612-bd5c-3a8f37474474">
+
+- Boom, he now has a face in the game!
+<img width="300" alt="image" src="https://github.com/Loic017/Football-Manager-Face-and-Logo-Importer/assets/105462797/7c52962e-b182-417f-9a90-375e369281e5">
+
+
+***
+
 # Technical Information
 A python GUI application build with customtkinterincluding Pilow for image handling and ElementTree XML for generating the XML config files.
 
@@ -64,3 +81,12 @@ See ![requirements.txt](https://github.com/Loic017/Football-Manager-Face-and-Log
 
 Customtkinter:
 [Website](https://customtkinter.tomschimansky.com/)
+
+***
+
+# Future Improvements
+- Improved resizing: Aspect ratio and other methods to keep the image from stretching too much
+- Competition image importing
+- Save graphics folder: No need to choose the graphics folder on each boot up
+- Fix bug where you cannot import an image right after importing one (User has to restart program after every use)
+- Add input validation
