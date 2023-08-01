@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 import customtkinter as ct
 from PIL import Image, ImageTk
+from saveGraphicsPath import saveGraphicsPath, loadGraphicsPath
 
 class GraphicsFolderFrame(ct.CTkFrame):
     def __init__(self, master):
@@ -13,6 +14,15 @@ class GraphicsFolderFrame(ct.CTkFrame):
         self.fmPathLabel.pack(padx=20, pady=3)
         self.inputButton = ct.CTkButton(self, text="Browse", command=self.findFolder)
         self.inputButton.pack(padx=20, pady=20)
+        self.lastButton = ct.CTkButton(self, text="Load Last Folder", command=self.getLastPath)
+        self.lastButton.pack(padx=20, pady=20)
+
+    def getLastPath(self):
+        self.path = loadGraphicsPath()
+        self.filePathLabel = ct.CTkLabel(self, text="Folder Path Picked:")
+        self.filePathLabel.pack()
+        self.filePathPath = ct.CTkLabel(self, text=self.path)
+        self.filePathPath.pack()
 
     # Add FootballManager Path
     def findFolder(self):

@@ -3,6 +3,7 @@ from PIL import Image
 from importComponents import GraphicsFolderFrame, ImportTypeFrame, UploadImageFrame
 import os
 from generateConfig import generateConfig
+from saveGraphicsPath import saveGraphicsPath, loadGraphicsPath
 
 
 # Finish Import Frame
@@ -37,6 +38,8 @@ class FinishImportFrame(ct.CTkFrame):
         self.importType = self.importType.importTypeVar.get()
         self.imagePath = self.filePath.imagePathLabel.cget("text")
         self.fmId = self.idInput.get()
+
+        saveGraphicsPath(self.graphicsPath)
 
         image = Image.open(str(self.imagePath))
         # Resize images to correct Football Manager dimensions
