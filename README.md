@@ -74,19 +74,15 @@ A python GUI application build with customtkinterincluding Pilow for image handl
 ## Libraries Used
 See ![requirements.txt](https://github.com/Loic017/Football-Manager-Face-and-Logo-Importer/blob/main/requirements.txt)
 
--   customtkinter==5.2.0
--   darkdetect==0.8.0
--   Pillow==10.0.0
--   tk==0.1.0
-
 Customtkinter:
 [Website](https://customtkinter.tomschimansky.com/)
+
+Pyinstaller is used to create the .exe
 
 ***
 
 # Future Improvements
 - Improved resizing: Aspect ratio and other methods to keep the image from stretching too much
 - Competition image importing
-- Save graphics folder: No need to choose the graphics folder on each boot up
+- ~~Save graphics folder: No need to choose the graphics folder on each boot up~~ ✅
 - Fix bug where you cannot import an image right after importing one (User has to restart program after every use)
-- Add input validation
