@@ -3,7 +3,7 @@ A program to import player faces or team logos individually into Football Manage
 
 Have a newgen you want to give a specific face? Maybe you want to give an existing legend a special picture with a trophy. Have a custom logo you made for your team? This program allows you to easily import them into the game individually, avoiding the hassle of resizing images, renaming them and the rest of the mess.
 
-This program auto resizes imported images into the correct sizes, creating two versions for the icon and larger variants of FM images. Alongside this, an XML config file is automatically generated.
+This program auto resizes imported images into the correct sizes, creating two versions for the icon and larger variants of FM images.
 
 ***
 
@@ -69,24 +69,20 @@ This program auto resizes imported images into the correct sizes, creating two v
 ***
 
 # Technical Information
-A python GUI application build with customtkinterincluding Pilow for image handling and ElementTree XML for generating the XML config files.
+A python GUI application built with customtkinter for GUI, Pilow for image handling, and ElementTree XML for generating the XML config files.
 
 ## Libraries Used
 See ![requirements.txt](https://github.com/Loic017/Football-Manager-Face-and-Logo-Importer/blob/main/requirements.txt)
 
--   customtkinter==5.2.0
--   darkdetect==0.8.0
--   Pillow==10.0.0
--   tk==0.1.0
-
 Customtkinter:
 [Website](https://customtkinter.tomschimansky.com/)
+
+Pyinstaller is used to create the .exe
 
 ***
 
 # Future Improvements
 - Improved resizing: Aspect ratio and other methods to keep the image from stretching too much
 - Competition image importing
-- Save graphics folder: No need to choose the graphics folder on each boot up
+- ~~Save graphics folder: No need to choose the graphics folder on each boot up~~ ✅
 - Fix bug where you cannot import an image right after importing one (User has to restart program after every use)
-- Add input validation
