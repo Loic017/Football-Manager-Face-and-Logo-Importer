@@ -44,8 +44,22 @@ class FinishImportFrame(ct.CTkFrame):
         image = Image.open(str(self.imagePath))
         # Resize images to correct Football Manager dimensions
         if self.importType == "logo":
-            normalLogo = image.resize((200, 200))
-            smallLogo = image.resize((20, 20))
+            # Calculate dimensions
+            normal_width = 200
+            normal_height = 200
+            small_width = 20
+            small_height = 20
+
+            current_width, current_height = image.size
+
+            if current_height > current_width:
+                normal_height = int((normal_width / current_width) * current_height)
+                small_height = int((small_width / current_width) * current_height)
+            else:
+                normal_width = int((normal_height / current_height) * current_width)
+                small_width = int((small_height / current_height) * current_width)
+            normalLogo = image.resize((normal_width, normal_height))
+            smallLogo = image.resize((small_width, small_height))
 
             # Create directory if it doesnt exist
             normalDir = "{}/{}/teamLogo/normal/".format(
@@ -69,8 +83,22 @@ class FinishImportFrame(ct.CTkFrame):
             generateConfig(self.fmId, True, parentDir, "normal/", "small/")
 
         elif self.importType == "player":
-            portraitFace = image.resize((250, 250))
-            iconFace = image.resize((20, 20))
+            # Calculate dimensions
+            normal_width = 250
+            normal_height = 250
+            small_width = 20
+            small_height = 20
+
+            current_width, current_height = image.size
+
+            if current_height > current_width:
+                normal_height = int((normal_width / current_width) * current_height)
+                small_height = int((small_width / current_width) * current_height)
+            else:
+                normal_width = int((normal_height / current_height) * current_width)
+                small_width = int((small_height / current_height) * current_width)
+            portraitFace = image.resize((normal_width, normal_height))
+            iconFace = image.resize((small_width, small_height))
 
             # Create directory if it doesnt exist
             normalDir = "{}/{}/playerFaces/portrait/".format(
@@ -93,7 +121,6 @@ class FinishImportFrame(ct.CTkFrame):
             )
             generateConfig(self.fmId, False, parentDir, "portrait/", "icon/")
 
-
 # Main App
 class App(ct.CTk):
     def __init__(self):
@@ -103,24 +130,24 @@ class App(ct.CTk):
 
         # Graphics Folder Frame
         self.graphicsFolder = GraphicsFolderFrame(self)
-        self.graphicsFolder.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsew")
+        self.graphicsFolder.grid(row=0, column=0, padx=20, pady=(20, 0), sticky="nsew")
 
         # Select Import Type
-        self.importType = ImportTypeFrame(self)
-        self.importType.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="nsew")
+        self.importTypeFr = ImportTypeFrame(self)
+        self.importTypeFr.grid(row=1, column=0, padx=20, pady=(20, 0), sticky="nsew")
 
         # Import Image Frame
         self.uploadImage = UploadImageFrame(self)
-        self.uploadImage.grid(row=1, column=1, padx=10, pady=(10, 0), sticky="nsew")
+        self.uploadImage.grid(row=1, column=1, padx=20, pady=(20, 0), sticky="nsew")
 
         # Finish Import
         self.finishImport = FinishImportFrame(
-            self, self.graphicsFolder, self.importType, self.uploadImage
+            self, self.graphicsFolder, self.importTypeFr, self.uploadImage
         )
-        self.finishImport.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsew")
+        self.finishImport.grid(row=2, column=0, padx=20, pady=(20, 0), sticky="nsew")
 
         # app = ct.CTk()
-        self.geometry("650x650")
+        self.geometry("800x900")
         self.title("Football Manager Importer")
 
 
